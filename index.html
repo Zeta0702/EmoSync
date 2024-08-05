@@ -1,0 +1,77 @@
+﻿﻿<!DOCTYPE html>
+<html>
+   <head>
+      <script type='text/javascript' > 
+        var circleVisible = false;
+      </script>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="cache-control" content="no-cache">
+      <meta http-equiv="pragma" content="no-cache">
+      <meta http-equiv="expires" content="0">
+      <link rel="stylesheet" href="posture-editor.css">
+      <script src="libs/three.min.js"></script>
+      <script src="libs/OrbitControls.min.js"></script>
+      <script src="libs/GLTFExporter.min.js"></script>
+      <script src="mannequin.js"></script>
+      <title>EmoSync</title>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.4.5/jscolor.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/three@0.130.1/examples/js/loaders/RGBELoader.js"></script>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+   </head>
+   <body onclick="removeColouredCircle()">
+      <div id="circle"></div>
+      <img src="textures/logo.png" alt="logo" class="logo">
+      <div class="panel" style="left:0">
+         <div class="heading panelText">Controls</div><hr>
+         <label class="ghostToggle"><input id="biological-constraints" type="checkbox" class="toggle" checked><span>Biological<br>constraints</span></label>
+         <label class="ghostToggle"><input id="inverse-kinematics" type="checkbox" class="toggle"><span>Inverse<br>kinematics</span></label>
+         <div class="panelText subHeading">Mannequin</div>
+         <label><input id="rot-z" type="checkbox" class="toggle" checked><span id="rot-z-name">Bend</span></label><br>
+         <label><input id="rot-x" type="checkbox" class="toggle"><span id="rot-x-name">Tilt</span></label><br>
+         <label><input id="rot-y" type="checkbox" class="toggle"><span id="rot-y-name">Turn</span></label><br>
+         <label><input id="mov-x" type="checkbox" class="toggle"><span>Move X</span></label><br>
+         <label><input id="mov-y" type="checkbox" class="toggle"><span>Move Y</span></label><br>
+         <label><input id="mov-z" type="checkbox" class="toggle"><span>Move Z</span></label>
+         <div class="panelText subHeading2">Options</div>
+         <span class="button-group">
+          <button onclick="refresh()">Reset</button>
+          <button id="ep">Export</button>
+         </span>
+         <div class="subHeading2 panelText">Body Tracking</div>
+         <span class="button-group">
+          <button>ManneMime</button><br>
+          <button>EmoColour</button><br>
+         </span>
+      </div>
+      <div class="panel" id="colourPicker" style="right:0">
+         <div id="colourPickerText" class="heading panelText">Emotional<br>Colour Picker</div><hr>
+         <div class="panelText subHeading">Positive Emotions</div>
+         <span class="button-group">
+            <button id="one" onclick="addColouredCircle(event, this)"></button>
+            <button id="two" onclick="addColouredCircle(event, this)"></button>
+            <button id="three" onclick="addColouredCircle(event, this)"></button>
+            <button id="four" onclick="addColouredCircle(event, this)"></button>
+            <button id="five" onclick="addColouredCircle(event, this)"></button>
+            <button id="six" onclick="addColouredCircle(event, this)"></button>
+            <button id="seven" onclick="addColouredCircle(event, this)"></button>
+         </span>
+         <div class="panelText subHeading"><br>Negative Emotions</div>
+         <span class="button-group">
+            <button id="eight" onclick="addColouredCircle(event, this)"></button>
+            <button id="nine" onclick="addColouredCircle(event, this)"></button>
+            <button id="ten" onclick="addColouredCircle(event, this)"></button>
+            <button id="eleven" onclick="addColouredCircle(event, this)"></button>
+            <button id="twelve" onclick="addColouredCircle(event, this)"></button>
+            <button id="thirteen" onclick="addColouredCircle(event, this)"></button>
+            <button id="fourteen" onclick="addColouredCircle(event, this)"></button>
+            <button id="fifteen" onclick="addColouredCircle(event, this)"></button>
+            <button id="sixteen" onclick="addColouredCircle(event, this)"></button>
+            <button id="seventeen" onclick="addColouredCircle(event, this)"></button>
+         </span>
+      </div>
+      <script src="posture-editor.js"></script>
+   </body>
+</html>

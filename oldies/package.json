@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "vite": "^5.3.4"
+  },
+  "name": "mannequin",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
