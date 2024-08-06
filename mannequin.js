@@ -1,6 +1,3 @@
-//import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.module.js';
-//import { RGBELoader } from 'https://cdn.jsdelivr.net/npm/three@0.149.0/examples/jsm/loaders/RGBELoader.js';
-
 // mannequin.js
 //
 // a libary for human figure
@@ -1804,20 +1801,18 @@ Mannequin.convert6to7 = function( posture )
 
 var clickedButton;
 
-function addColouredCircle(event, button) {
+function addCircle(event, button) {
 	event.stopPropagation();
 	var circle = document.getElementById("circle");
-	circle.style.backgroundColor = window.getComputedStyle( button ,null).getPropertyValue('background-color');
 	document.body.addEventListener("mousemove", function(e) {
 		circle.style.left = e.clientX + "px",
 		circle.style.top = e.clientY + "px";
 	});
 	circle.style.display = 'block';
-	clickedButton = button;
 	circleVisible = true;
 }
 
-function removeColouredCircle() {
+function removeCircle() {
 
 	if (circleVisible) {
 		var circle = document.getElementById("circle");
@@ -1853,3 +1848,53 @@ document.addEventListener('click', function(event) {
         }
     }
 });
+
+// function addColouredCircle(event, button) {
+// 	event.stopPropagation();
+// 	var circle = document.getElementById("circle");
+// 	circle.style.backgroundColor = window.getComputedStyle( button ,null).getPropertyValue('background-color');
+// 	document.body.addEventListener("mousemove", function(e) {
+// 		circle.style.left = e.clientX + "px",
+// 		circle.style.top = e.clientY + "px";
+// 	});
+// 	circle.style.display = 'block';
+// 	clickedButton = button;
+// 	circleVisible = true;
+// }
+
+// function removeColouredCircle() {
+
+// 	if (circleVisible) {
+// 		var circle = document.getElementById("circle");
+// 		circle.style.display = 'none';
+// 	}
+// 	setTimeout(setCircleVisibleToFalse, 10);
+// }
+
+// function setCircleVisibleToFalse() {
+// 	circleVisible = false;
+// }
+
+// function refresh() {
+// 	location.reload();
+// }
+
+// document.addEventListener('click', function(event) {
+// 	if (circleVisible) {
+//         event.preventDefault();
+//         var mouse = new THREE.Vector2();
+//         mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+//         mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+//         var raycaster = new THREE.Raycaster();
+//         raycaster.setFromCamera(mouse, camera);
+
+//         var intersects = raycaster.intersectObjects(scene.children, true);
+//         if (intersects.length > 0) {
+//             var intersectedObject = intersects[0].object;
+//             var circleElement = document.getElementById('circle');
+//             var circleColor = window.getComputedStyle(circleElement).backgroundColor;
+//             intersectedObject.material.color.setStyle(circleColor);
+// 			renderer.render(scene, camera);
+//         }
+//     }
+// });

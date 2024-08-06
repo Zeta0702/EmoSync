@@ -21,7 +21,7 @@
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lexend:wght@100..900&display=swap" rel="stylesheet">
    </head>
-   <body onclick="removeColouredCircle()">
+   <body onclick="removeCircle()">
       <div id="circle"></div>
       <img src="textures/logo.png" alt="logo" class="logo">
       <div class="panel" style="left:0">
@@ -47,29 +47,31 @@
          </span>
       </div>
       <div class="panel" id="colourPicker" style="right:0">
-         <div id="colourPickerText" class="heading panelText">Emotional<br>Colour Picker</div><hr>
+         <div id="colourPickerText" class="heading panelText">Emotional<br>Colour Picker
+            <div id="eraser" onclick="addCircle(event)"></div>
+         </div><hr>
          <div class="panelText subHeading">Positive Emotions</div>
          <span class="button-group">
-            <button id="one" onclick="addColouredCircle(event, this)"></button>
-            <button id="two" onclick="addColouredCircle(event, this)"></button>
-            <button id="three" onclick="addColouredCircle(event, this)"></button>
-            <button id="four" onclick="addColouredCircle(event, this)"></button>
-            <button id="five" onclick="addColouredCircle(event, this)"></button>
-            <button id="six" onclick="addColouredCircle(event, this)"></button>
-            <button id="seven" onclick="addColouredCircle(event, this)"></button>
+            <button id="one" onclick="changeColour(event, this)"></button>
+            <button id="two" onclick="changeColour(event, this)"></button>
+            <button id="three" onclick="changeColour(event, this)"></button>
+            <button id="four" onclick="changeColour(event, this)"></button>
+            <button id="five" onclick="changeColour(event, this)"></button>
+            <button id="six" onclick="changeColour(event, this)"></button>
+            <button id="seven" onclick="changeColour(event, this)"></button>
          </span>
          <div class="panelText subHeading"><br>Negative Emotions</div>
          <span class="button-group">
-            <button id="eight" onclick="addColouredCircle(event, this)"></button>
-            <button id="nine" onclick="addColouredCircle(event, this)"></button>
-            <button id="ten" onclick="addColouredCircle(event, this)"></button>
-            <button id="eleven" onclick="addColouredCircle(event, this)"></button>
-            <button id="twelve" onclick="addColouredCircle(event, this)"></button>
-            <button id="thirteen" onclick="addColouredCircle(event, this)"></button>
-            <button id="fourteen" onclick="addColouredCircle(event, this)"></button>
-            <button id="fifteen" onclick="addColouredCircle(event, this)"></button>
-            <button id="sixteen" onclick="addColouredCircle(event, this)"></button>
-            <button id="seventeen" onclick="addColouredCircle(event, this)"></button>
+            <button id="eight" onclick="changeColour(event, this)"></button>
+            <button id="nine" onclick="changeColour(event, this)"></button>
+            <button id="ten" onclick="changeColour(event, this)"></button>
+            <button id="eleven" onclick="changeColour(event, this)"></button>
+            <button id="twelve" onclick="changeColour(event, this)"></button>
+            <button id="thirteen" onclick="changeColour(event, this)"></button>
+            <button id="fourteen" onclick="changeColour(event, this)"></button>
+            <button id="fifteen" onclick="changeColour(event, this)"></button>
+            <button id="sixteen" onclick="changeColour(event, this)"></button>
+            <button id="seventeen" onclick="changeColour(event, this)"></button>
          </span>
       </div>
       <script src="posture-editor.js"></script>

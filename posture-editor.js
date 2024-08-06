@@ -653,5 +653,3 @@ function removeModel()
 
 	renderer.render(scene, camera);
 }
-
-// Additional code can be inserted here if needed for posture-editor.js
