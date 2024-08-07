@@ -29,9 +29,9 @@
          <label class="ghostToggle"><input id="biological-constraints" type="checkbox" class="toggle" checked><span>Biological<br>constraints</span></label>
          <label class="ghostToggle"><input id="inverse-kinematics" type="checkbox" class="toggle"><span>Inverse<br>kinematics</span></label>
          <div class="panelText subHeading">Mannequin</div>
-         <label><input id="rot-z" type="checkbox" class="toggle" checked><span id="rot-z-name">Bend</span></label><br>
-         <label><input id="rot-x" type="checkbox" class="toggle"><span id="rot-x-name">Tilt</span></label><br>
-         <label><input id="rot-y" type="checkbox" class="toggle"><span id="rot-y-name">Turn</span></label><br>
+         <label><input id="rot-z" type="checkbox" class="ghosttoggle" checked><span id="rot-z-name">Bend</span></label>
+         <label><input id="rot-x" type="checkbox" class="toggle"><span id="rot-x-name">Tilt</span></label><br id="x">
+         <label><input id="rot-y" type="checkbox" class="toggle"><span id="rot-y-name">Turn</span></label><br id="y">
          <label><input id="mov-x" type="checkbox" class="toggle"><span>Move X</span></label><br>
          <label><input id="mov-y" type="checkbox" class="toggle"><span>Move Y</span></label><br>
          <label><input id="mov-z" type="checkbox" class="toggle"><span>Move Z</span></label>
@@ -52,26 +52,26 @@
          </div><hr>
          <div class="panelText subHeading">Positive Emotions</div>
          <span class="button-group">
-            <button id="one" onclick="changeColour(event, this)"></button>
-            <button id="two" onclick="changeColour(event, this)"></button>
-            <button id="three" onclick="changeColour(event, this)"></button>
-            <button id="four" onclick="changeColour(event, this)"></button>
-            <button id="five" onclick="changeColour(event, this)"></button>
-            <button id="six" onclick="changeColour(event, this)"></button>
-            <button id="seven" onclick="changeColour(event, this)"></button>
+            <button id="one" onclick="changeColour(this)"></button>
+            <button id="two" onclick="changeColour(this)"></button>
+            <button id="three" onclick="changeColour(this)"></button>
+            <button id="four" onclick="changeColour(this)"></button>
+            <button id="five" onclick="changeColour(this)"></button>
+            <button id="six" onclick="changeColour(this)"></button>
+            <button id="seven" onclick="changeColour(this)"></button>
          </span>
          <div class="panelText subHeading"><br>Negative Emotions</div>
          <span class="button-group">
-            <button id="eight" onclick="changeColour(event, this)"></button>
-            <button id="nine" onclick="changeColour(event, this)"></button>
-            <button id="ten" onclick="changeColour(event, this)"></button>
-            <button id="eleven" onclick="changeColour(event, this)"></button>
-            <button id="twelve" onclick="changeColour(event, this)"></button>
-            <button id="thirteen" onclick="changeColour(event, this)"></button>
-            <button id="fourteen" onclick="changeColour(event, this)"></button>
-            <button id="fifteen" onclick="changeColour(event, this)"></button>
-            <button id="sixteen" onclick="changeColour(event, this)"></button>
-            <button id="seventeen" onclick="changeColour(event, this)"></button>
+            <button id="eight" onclick="changeColour(this)"></button>
+            <button id="nine" onclick="changeColour(this)"></button>
+            <button id="ten" onclick="changeColour(this)"></button>
+            <button id="eleven" onclick="changeColour(this)"></button>
+            <button id="twelve" onclick="changeColour(this)"></button>
+            <button id="thirteen" onclick="changeColour(this)"></button>
+            <button id="fourteen" onclick="changeColour(this)"></button>
+            <button id="fifteen" onclick="changeColour(this)"></button>
+            <button id="sixteen" onclick="changeColour(this)"></button>
+            <button id="seventeen" onclick="changeColour(this)"></button>
          </span>
       </div>
       <script src="posture-editor.js"></script>

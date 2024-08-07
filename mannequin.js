@@ -40,7 +40,7 @@ function createScene()
 	scene.background = new THREE.Color('rgb(204,233,229)');
 
 	camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 2000);
-	camera.position.set(0, 0, 200);
+	camera.position.set(0, 0, 180);
 
 	light = new THREE.PointLight('white', 0.5);
 	light.position.set(0, 100, 50);
@@ -84,9 +84,9 @@ function createScene()
 	);
 	ground1.receiveShadow = true;
 	ground3.receiveShadow = true;
-	ground1.position.y = -31;
-	ground2.position.y = -33;
-	ground3.position.y = -35;
+	ground1.position.y = -25;
+	ground2.position.y = -27;
+	ground3.position.y = -29;
 	ground1.rotation.x = -Math.PI / 2;
 	ground2.rotation.x = -Math.PI / 2;
 	ground3.rotation.x = -Math.PI / 2;
@@ -466,45 +466,47 @@ class TorsoShape extends ParametricShape
 // flexible joint
 class Joint extends THREE.Group
 {
-	constructor(parentJoint, pos, params, shape)
-	{
-		super();
-		var yVal = params.sy || params[1];
+	constructor(parentJoint, pos, params, shape) {
+        super();
+        var yVal = params.sy || params[1];
 
-		if( shape )
-			this.image = new shape(parentJoint ? parentJoint.feminine : false, params);
-		else
-			this.image = new THREE.Group();
-		
-		this.image.castShadow = true;
-		if (shape != PelvisShape && shape != ShoeShape) this.image.position.set(0, yVal / 2, 0);
+        if (shape)
+            this.image = new shape(parentJoint ? parentJoint.feminine : false, params);
+        else
+            this.image = new THREE.Group();
 
-		this.imageWrapper = new THREE.Group();
-		this.imageWrapper.add(this.image);
-		this.imageWrapper.castShadow = true;
+        this.image.castShadow = true;
+        if (shape != PelvisShape && shape != ShoeShape) this.image.position.set(0, yVal / 2, 0);
 
-		this.add(this.imageWrapper);
+        this.imageWrapper = new THREE.Group();
+        this.imageWrapper.add(this.image);
+        this.imageWrapper.castShadow = true;
 
-		this.castShadow = true;
-		this.yVal = yVal;
-		this.parentJoint = parentJoint;
+        this.add(this.imageWrapper);
 
-		if (parentJoint)
-		{ // attaching to parent joint
-			this.position.set(0, shape?parentJoint.yVal:parentJoint.yVal/4, 0);
-			parentJoint.imageWrapper.add(this);
-			this.feminine = parentJoint.feminine;
-		}
+        this.castShadow = true;
+        this.yVal = yVal;
+        this.parentJoint = parentJoint;
 
-		if (pos)
-		{ // initial joint position
-			this.position.set(pos[0], pos[1], pos[2]);
-		}
+        if (parentJoint) { // attaching to parent joint
+            this.position.set(0, shape ? parentJoint.yVal : parentJoint.yVal / 4, 0);
+            parentJoint.imageWrapper.add(this);
+            this.feminine = parentJoint.feminine;
+        }
 
-		this.minRot = new THREE.Vector3();
-		this.maxRot = new THREE.Vector3();
-	} // Joint.constructor
+        if (pos) { // initial joint position
+            this.position.set(pos[0], pos[1], pos[2]);
+        }
 
+        this.minRot = new THREE.Vector3();
+        this.maxRot = new THREE.Vector3();
+
+        // Store original color
+        if (this.image && this.image.isMesh) {
+            this.image.userData.originalColor = this.image.material.color.getHex();
+        }
+    }
+	
 	get z()
 	{
 		this.rotation.reorder('YXZ');
@@ -598,16 +600,19 @@ class Joint extends THREE.Group
 		return scene.worldToLocal(this.localToWorld(new THREE.Vector3(x, y, z)));
 	} // Joint.point
 
-	select(state)
-	{
-		this.traverse(function (o)
-		{
-
-			//if (o.material && o.material.emissive) o.material.emissive.setRGB(0, state ? -1 : 0, state ? -0.4 : 0);
-			if (o.material && o.material.emissive) o.material.emissive.setRGB(state ? -0.4 : 0, state ? -0.18 : 0, state ? -0.2 : 0);
-			//if (o.material && o.material.emissive) o.material.emissive.setRGB(state ? -0.46274509803 : 0, state ? -0.8431372549 : 0, state ? -0.81176470588 : 0);
-		});
-	} // Joint.select
+	// Modify the select method to only change the color of the clicked part
+	select(state) {
+		if (state) {
+			if (this.image && this.image.isMesh) {
+				this.image.material.color.set('white');
+			}
+		} else {
+			if (this.image && this.image.isMesh) {
+				this.image.material.color.set(this.image.userData.originalColor || 'originalColor');
+			}
+		}
+	}
+	
 } // Joint
 
 
@@ -1420,6 +1425,8 @@ class Mannequin extends THREE.Group
 		this.updateWorldMatrix();
 
 		// default general posture
+		this.position.y += 6;
+
 		this.body.turn = -90;
 
 		this.torso.bend = 2;
@@ -1801,7 +1808,7 @@ Mannequin.convert6to7 = function( posture )
 
 var clickedButton;
 
-function addCircle(event, button) {
+function addCircle(event) {
 	event.stopPropagation();
 	var circle = document.getElementById("circle");
 	document.body.addEventListener("mousemove", function(e) {
@@ -1809,19 +1816,24 @@ function addCircle(event, button) {
 		circle.style.top = e.clientY + "px";
 	});
 	circle.style.display = 'block';
-	circleVisible = true;
+	setTimeout(setCircleVisibleToTrue, 1);
 }
 
 function removeCircle() {
-
 	if (circleVisible) {
 		var circle = document.getElementById("circle");
 		circle.style.display = 'none';
+		setTimeout(setCircleVisibleToFalse, 0);
 	}
-	setTimeout(setCircleVisibleToFalse, 10);
+}
+
+function setCircleVisibleToTrue() {
+	//console.log('set cv to true');
+	circleVisible = true;
 }
 
 function setCircleVisibleToFalse() {
+	//console.log('set cv to false');
 	circleVisible = false;
 }
 
@@ -1841,60 +1853,23 @@ document.addEventListener('click', function(event) {
         var intersects = raycaster.intersectObjects(scene.children, true);
         if (intersects.length > 0) {
             var intersectedObject = intersects[0].object;
-            var circleElement = document.getElementById('circle');
-            var circleColor = window.getComputedStyle(circleElement).backgroundColor;
-            intersectedObject.material.color.setStyle(circleColor);
-			renderer.render(scene, camera);
+			var color = intersectedObject.material.color;
+			if (intersectedObject.geometry.type == 'ParametricGeometry' && color.r != color.g && color.r != color.b) {
+			// if (intersectedObject.geometry.type == 'ParametricGeometry' && intersectedObject.parent.name != 'neck' && color.r != color.g && color.r != color.b) {
+				intersectedObject.material.color.setStyle('rgb(235,235,235)');
+				renderer.render(scene, camera);
+				addCircle(event);
+			}
         }
     }
 });
 
-// function addColouredCircle(event, button) {
-// 	event.stopPropagation();
-// 	var circle = document.getElementById("circle");
-// 	circle.style.backgroundColor = window.getComputedStyle( button ,null).getPropertyValue('background-color');
-// 	document.body.addEventListener("mousemove", function(e) {
-// 		circle.style.left = e.clientX + "px",
-// 		circle.style.top = e.clientY + "px";
-// 	});
-// 	circle.style.display = 'block';
-// 	clickedButton = button;
-// 	circleVisible = true;
-// }
-
-// function removeColouredCircle() {
-
-// 	if (circleVisible) {
-// 		var circle = document.getElementById("circle");
-// 		circle.style.display = 'none';
-// 	}
-// 	setTimeout(setCircleVisibleToFalse, 10);
-// }
-
-// function setCircleVisibleToFalse() {
-// 	circleVisible = false;
-// }
-
-// function refresh() {
-// 	location.reload();
-// }
-
-// document.addEventListener('click', function(event) {
-// 	if (circleVisible) {
-//         event.preventDefault();
-//         var mouse = new THREE.Vector2();
-//         mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-//         mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-//         var raycaster = new THREE.Raycaster();
-//         raycaster.setFromCamera(mouse, camera);
-
-//         var intersects = raycaster.intersectObjects(scene.children, true);
-//         if (intersects.length > 0) {
-//             var intersectedObject = intersects[0].object;
-//             var circleElement = document.getElementById('circle');
-//             var circleColor = window.getComputedStyle(circleElement).backgroundColor;
-//             intersectedObject.material.color.setStyle(circleColor);
-// 			renderer.render(scene, camera);
-//         }
-//     }
-// });
+// Function to change color of the selected body part if that body part is not a ball joint or a fingernail
+function changeColour(button) {
+	// if (selectedBodyPart && selectedBodyPart.geometry.type == 'ParametricGeometry' && selectedBodyPart.parent.name != 'neck') {
+	if (selectedBodyPart && selectedBodyPart.geometry.type == 'ParametricGeometry') {
+		var color = window.getComputedStyle(button).backgroundColor;
+		selectedBodyPart.material.color.setStyle(color);
+		renderer.render(scene, camera);
+	}
+  }

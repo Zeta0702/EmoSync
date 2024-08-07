@@ -1,3 +1,4 @@
+var selectedBodyPart = null;
 const EPS = 0.00001;
 
 
@@ -207,44 +208,6 @@ function animate() {
   renderer.render(scene, camera);
 }
 
-var selectedBodyPart = null;
-function onMouseDown(event) {
-  event.preventDefault();
-
-  var mouse = new THREE.Vector2();
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-  var raycaster = new THREE.Raycaster();
-  raycaster.setFromCamera(mouse, camera);
-
-  var intersects = raycaster.intersectObjects(model.children, true);
-
-  console.log(intersects);
-
-  if (intersects.length > 0) {
-    selectedBodyPart = intersects[0].object;
-    document.getElementById('colorPicker').jscolor.show();
-  }
-}
-
-// function updateColor(picker) {
-// 	if (selectedBodyPart) {
-// 	  var color = new THREE.Color('#' + picker.toString());
-// 	  selectedBodyPart.material.color.set(color);
-// 	}
-//   }
-  
-//   window.addEventListener('mousedown', onMouseDown, false);
-  
-//   function resize() {
-// 	camera.aspect = window.innerWidth / window.innerHeight;
-// 	camera.updateProjectionMatrix();
-// 	renderer.setSize(window.innerWidth, window.innerHeight);
-//   }
-//   window.addEventListener('resize', resize, false);
-//   resize();
-
 var mouse = new THREE.Vector2(), // mouse 3D position
 	mouseButton = undefined, // pressed mouse buttons
 	raycaster = new THREE.Raycaster(), // raycaster to grab body part
@@ -360,58 +323,72 @@ function deselect()
 	obj = undefined;
 }
 
+function onPointerDown(event) {
+    userInput(event);
 
-function onPointerDown(event)
-{
-	userInput(event);
+    gauge.parent?.remove(gauge);
+    dragPoint.parent?.remove(dragPoint);
 
-	gauge.parent?.remove(gauge);
-	dragPoint.parent?.remove(dragPoint);
+    raycaster.setFromCamera(mouse, camera);
 
-	raycaster.setFromCamera(mouse, camera);
+    var intersects = raycaster.intersectObjects(models, true);
 
-	var intersects = raycaster.intersectObjects(models, true);
+    if (intersects.length && (intersects[0].object.name || intersects[0].object.parent.name)) {
+        controls.enabled = false;
 
-	if (intersects.length && (intersects[0].object.name || intersects[0].object.parent.name))
-	{
-		controls.enabled = false;
+        var scanObj;
+        for (scanObj = intersects[0].object; !(scanObj instanceof Mannequin) && !(scanObj instanceof THREE.Scene); scanObj = scanObj?.parent) {
+        }
 
-		var scanObj;
-		for( scanObj=intersects[0].object; !(scanObj instanceof Mannequin) && !(scanObj instanceof THREE.Scene); scanObj = scanObj?.parent )
-		{
+        if (scanObj instanceof Mannequin) model = scanObj;
+
+        var name = intersects[0].object.name || intersects[0].object.parent.name;
+
+        if (name == 'neck') name = 'head';
+        if (name == 'pelvis') name = 'body';
+
+        if (!circleVisible) {
+            select(model[name]);
+        }
+
+        document.getElementById('rot-x-name').innerHTML = model[name].nameUI.x || 'N/A';
+        document.getElementById('rot-y-name').innerHTML = model[name].nameUI.y || 'N/A';
+        document.getElementById('rot-z-name').innerHTML = model[name].nameUI.z || 'N/A';
+
+		if (document.getElementById('rot-x-name').innerHTML == 'N/A') {
+			document.getElementById('rot-x-name').style.display = 'none';
+			document.getElementById('rot-x').style.display = 'none';
+			document.getElementById('x').style.display = 'none';
+		} else {
+			document.getElementById('rot-x-name').style.display = 'inline-block';
+			document.getElementById('rot-x').style.display = 'inline-block';
+			document.getElementById('x').style.display = 'inline-block';
+		}
+
+		if (document.getElementById('rot-y-name').innerHTML == 'N/A') {
+			document.getElementById('rot-y-name').style.display = 'none';
+			document.getElementById('rot-y').style.display = 'none';
+			document.getElementById('y').style.display = 'none';
+		} else {
+			document.getElementById('rot-y-name').style.display = 'inline-block';
+			document.getElementById('rot-y').style.display = 'inline-block';
+			document.getElementById('y').style.display = 'inline-block';
 		}
 		
-		if( scanObj instanceof Mannequin ) model = scanObj;
+        // Update selected body part
+        selectedBodyPart = intersects[0].object;  // Store the selected body part
 
-		var name = intersects[0].object.name || intersects[0].object.parent.name;
-
-		if (name == 'neck') name = 'head';
-		if (name == 'pelvis') name = 'body';
-
-		if (circleVisible) {
-			
-		} else {
-			select(model[name]);
-		}
-
-		document.getElementById('rot-x-name').innerHTML = model[name].nameUI.x || 'N/A';
-		document.getElementById('rot-y-name').innerHTML = model[name].nameUI.y || 'N/A';
-		document.getElementById('rot-z-name').innerHTML = model[name].nameUI.z || 'N/A';
-
-
-		if (obj) { // Ensure obj is defined before using it
+        if (obj) { // Ensure obj is defined before using it
             dragPoint.position.copy(obj.worldToLocal(intersects[0].point));
             obj.imageWrapper.add(dragPoint);
 
-		if (!cbMovX.checked && !cbMovY.checked && !cbMovZ.checked) obj.imageWrapper.add(gauge);
-		gauge.position.y = (obj instanceof Ankle) ? 2 : 0;
+            if (!cbMovX.checked && !cbMovY.checked && !cbMovZ.checked) obj.imageWrapper.add(gauge);
+            gauge.position.y = (obj instanceof Ankle) ? 2 : 0;
 
-		processCheckBoxes();
-
-		}
-
-	}
-	renderer.setAnimationLoop(drawFrame);
+            processCheckBoxes();
+        }
+    }
+    renderer.setAnimationLoop(drawFrame);
 }
 
 

@@ -1,0 +1,20 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+canvas {
+  display: block;
+}
+
+#emotion-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 4em;
+  font-family: 'Lexend';
+  font-weight: 400;
+  text-transform: uppercase;
+  color: rgb(118,215,207);
+  margin-top: 0.1em;
+  margin-left: 0.3em;
+}

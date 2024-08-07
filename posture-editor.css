@@ -8,7 +8,7 @@ input[type=checkbox] {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	-webkit-tap-highlight-color: transparent;
+	-webkit-tap-highlight-color: 'transparent';
 	outline: 0;
 }
 
@@ -34,7 +34,7 @@ span.short {
 	top: 0;
 	z-index: 10;
 	border-radius: 1em;
-	background: rgb(236,246,246);
+	background: rgb(235,235,235);
 	border: solid 1px rgba(0, 0, 0, 0.05);
 	/*box-shadow: inset 0 0 0.1em rgba(0, 0, 0, 0.1);*/
 	backdrop-filter: blur(0.3em);
@@ -121,7 +121,7 @@ hr {
 	margin-bottom: 1em;
 	border: 0;
 	height: 1px;
-	background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+	background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0));
 }
 
 label {
@@ -176,8 +176,8 @@ button,
 	position: relative;
 	margin: 0;
 	padding: 0;
-	border: 1px solid gray;
-	background: rgba(0, 0, 0, 3%);
+	border: 1px solid black;
+	background: rgb(235,235,235);
 	vertical-align: middle;
 }
 
@@ -206,8 +206,8 @@ button:hover {
 	width: 16px;
 	height: 16px;
 	border-radius: 50%;
-	background: rgba(0, 0, 0, 10%);
-	border: solid 1px gray;
+	background: rgb(235,235,235);
+	border: solid 1px black;
 }
 
 /*
@@ -245,7 +245,7 @@ textarea {
 	z-index: 1000;
 	left: -100px;
  	top: 50%;
-	border: solid 0.5px #000000;
+	border: solid 1px #000000;
 	background-color: rgb(235,235,235);
   }
 
@@ -256,7 +256,7 @@ textarea {
 	width: 24px;
 	cursor: pointer;
 	z-index: 1000;
-	border: solid 0.5px #000000;
+	border: solid 1px #000000;
 	background-color: rgb(235,235,235);
 	left: 10.6em;
 	bottom: 0.2em;
@@ -266,6 +266,6 @@ textarea {
 	position: relative;
 }
 
-/*#blurrer:hover {
-	backdrop-filter: blur(0.3em);
-}*/
+#rot-z-name {
+	display: none;
+}
