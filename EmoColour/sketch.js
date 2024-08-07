@@ -64,7 +64,7 @@ function setup() {
   // createCanvas(640, 480);
   createCanvas(windowWidth, windowHeight);
   myCapture = createCapture(VIDEO);
-  myCapture.size(2560, 1664);
+  myCapture.size(1920, 1080);
   myCapture.hide();
 
   colors = [
@@ -89,13 +89,13 @@ function draw() {
   drawPosePoints();
 
   if (currentText) {
-    textSize(64)
-    fill(118,215,207)
-    text(currentText, 16, 64)
-    // document.getElementById('emotion-text').innerHTML = currentText;
-  } // else {
-  //   document.getElementById('emotion-text').innerHTML = '';
-  // }
+    // textSize(64)
+    // fill(118,215,207)
+    // text(currentText, 16, 64)
+     document.getElementById('emotion-text').innerHTML = currentText;
+   }  else {
+      document.getElementById('emotion-text').innerHTML = '';
+    }
 }
 
 //------------------------------------------
@@ -174,6 +174,7 @@ function drawPosePoints() {
             joinPos = [11, 12, 14, 16, 24, 23, 15, 13]
             c = color(255, 25, 25)
             currentText = 'Angry'
+            document.getElementById('emotion-text').style.color = 'rgb(255, 25, 25)';
           }
           // Angry2
           else if (realList[13].x < realList[15].x - d
@@ -186,6 +187,7 @@ function drawPosePoints() {
             joinPos = [11, 12, 14, 13]
             c = color(226, 106, 106)
             currentText = 'Angry'
+            document.getElementById('emotion-text').style.color = 'rgb(226, 106, 106)';
           }
           // Bored
           else if (
@@ -199,6 +201,7 @@ function drawPosePoints() {
             joinPos = [11, 12, 14, 13]
             c = color(241, 169, 161)
             currentText = 'Bored'
+            document.getElementById('emotion-text').style.color = 'rgb(241, 169, 161)';
           }
           // Hopeless
           else if (realList[13].x < realList[15].x - d
@@ -215,6 +218,7 @@ function drawPosePoints() {
             joinPos = [11, 12, 14, 16, 15, 13]
             c = color(30, 138, 194)
             currentText = 'Hopeless'
+            document.getElementById('emotion-text').style.color = 'rgb(30, 138, 194)';
           }
           // Shame
           else if (dist(realList[16].x, realList[16].y, realList[0].x, realList[0].y) < rateDist
@@ -223,6 +227,7 @@ function drawPosePoints() {
             joinPos = [0, 16, 15, 13, 11]
             c = color(95, 52, 135)
             currentText = 'Shame'
+            document.getElementById('emotion-text').style.color = 'rgb(95, 52, 135)';
           }
           // Fear
           else if (realList[15].y < realList[11].y
@@ -233,6 +238,7 @@ function drawPosePoints() {
             joinPos = [0, 16, 14, 12, 11, 13, 15]
             c = color(30, 58, 146)
             currentText = 'Fear'
+            document.getElementById('emotion-text').style.color = 'rgb(30, 58, 146)';
           }
           // Shock
           else if (realList[15].x < realList[13].x
@@ -243,6 +249,7 @@ function drawPosePoints() {
             joinPos = [15, 16, 14, 24, 23, 13]
             c = color(88, 171, 227)
             currentText = 'Shock'
+            document.getElementById('emotion-text').style.color = 'rgb(88, 171, 227)';
           }
           // Joy1
           else if (realList[28].y < realList[25].y - d
@@ -250,6 +257,7 @@ function drawPosePoints() {
             joinPos = [16, 12, 24, 26, 28]
             c = color(255, 169, 0)
             currentText = 'Joy'
+            document.getElementById('emotion-text').style.color = 'rgb(255, 169, 0)';
           }
           // Joy2
           else if (realList[15].y < realList[13].y
@@ -261,6 +269,7 @@ function drawPosePoints() {
             joinPos = [15, 13, 11, 24, 26, 28, 16]
             c = color(255, 223, 13)
             currentText = 'Joy'
+            document.getElementById('emotion-text').style.color = 'rgb(255, 223, 13)';
           }
           // Joy3
           else if (realList[15].y < realList[13].y
@@ -271,6 +280,7 @@ function drawPosePoints() {
             joinPos = [15, 16, 14, 12, 11, 13]
             c = color(255, 169, 0)
             currentText = 'Joy'
+            document.getElementById('emotion-text').style.color = 'rgb(255, 169, 0)';
           }
           // Anticipation1
           else if (realList[15].y < realList[13].y
@@ -278,6 +288,7 @@ function drawPosePoints() {
             joinPos = [15, 14, 28, 27, 25, 23]
             c = color(255, 113, 13)
             currentText = 'Anticipation'
+            document.getElementById('emotion-text').style.color = 'rgb(255, 113, 13)';
           }
           // Anticipation2
           else if (realList[16].y < realList[14].y
@@ -285,6 +296,7 @@ function drawPosePoints() {
             joinPos = [15, 14, 28, 27, 25, 23]
             c = color(255, 169, 0)
             currentText = 'Anticipation'
+            document.getElementById('emotion-text').style.color = 'rgb(255, 169, 0)';
           }
           // Grateful1
           else if (realList[15].x < realList[13].x
@@ -298,6 +310,7 @@ function drawPosePoints() {
             joinPos = [11, 12, 14, 16, 15, 13]
             c = color(42, 187, 154)
             currentText = 'Grateful'
+            document.getElementById('emotion-text').style.color = 'rgb(42, 187, 154)';
           }
           // Grateful2
           else if (abs(realList[11].y - realList[13].y) < d
@@ -307,6 +320,7 @@ function drawPosePoints() {
             joinPos = [15, 16, 24, 23]
             c = color(33, 152, 117)
             currentText = 'Grateful'
+            document.getElementById('emotion-text').style.color = 'rgb(33, 152, 117)';
           }
           // Trust
           else if (abs(realList[11].y - realList[13].y) < d
@@ -316,6 +330,7 @@ function drawPosePoints() {
             joinPos = [15, 13, 11, 12, 14, 16]
             c = color(54, 215, 183)
             currentText = 'Trust'
+            document.getElementById('emotion-text').style.color = 'rgb(54, 215, 183)';
           }
           else {
             currentText = ''
@@ -361,7 +376,7 @@ function drawPosePoints() {
 
 function grahamScan(points) {
   points.sort((a, b) => a.x - b.x || a.y - b.y);
-
+  
   let lower = [];
   for (let p of points) {
     while (

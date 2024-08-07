@@ -10,6 +10,7 @@ input[type=checkbox] {
 	appearance: none;
 	-webkit-tap-highlight-color: 'transparent';
 	outline: 0;
+	cursor: pointer;
 }
 
 span.short {

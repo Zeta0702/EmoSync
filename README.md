@@ -1,1 +1,1 @@
-This is the code for Zeta's EmoSync website.
+This is the code for my masters project, EmoSync.

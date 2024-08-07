@@ -466,47 +466,45 @@ class TorsoShape extends ParametricShape
 // flexible joint
 class Joint extends THREE.Group
 {
-	constructor(parentJoint, pos, params, shape) {
-        super();
-        var yVal = params.sy || params[1];
+	constructor(parentJoint, pos, params, shape)
+	{
+		super();
+		var yVal = params.sy || params[1];
 
-        if (shape)
-            this.image = new shape(parentJoint ? parentJoint.feminine : false, params);
-        else
-            this.image = new THREE.Group();
+		if( shape )
+			this.image = new shape(parentJoint ? parentJoint.feminine : false, params);
+		else
+			this.image = new THREE.Group();
+		
+		this.image.castShadow = true;
+		if (shape != PelvisShape && shape != ShoeShape) this.image.position.set(0, yVal / 2, 0);
 
-        this.image.castShadow = true;
-        if (shape != PelvisShape && shape != ShoeShape) this.image.position.set(0, yVal / 2, 0);
+		this.imageWrapper = new THREE.Group();
+		this.imageWrapper.add(this.image);
+		this.imageWrapper.castShadow = true;
 
-        this.imageWrapper = new THREE.Group();
-        this.imageWrapper.add(this.image);
-        this.imageWrapper.castShadow = true;
+		this.add(this.imageWrapper);
 
-        this.add(this.imageWrapper);
+		this.castShadow = true;
+		this.yVal = yVal;
+		this.parentJoint = parentJoint;
 
-        this.castShadow = true;
-        this.yVal = yVal;
-        this.parentJoint = parentJoint;
+		if (parentJoint)
+		{ // attaching to parent joint
+			this.position.set(0, shape?parentJoint.yVal:parentJoint.yVal/4, 0);
+			parentJoint.imageWrapper.add(this);
+			this.feminine = parentJoint.feminine;
+		}
 
-        if (parentJoint) { // attaching to parent joint
-            this.position.set(0, shape ? parentJoint.yVal : parentJoint.yVal / 4, 0);
-            parentJoint.imageWrapper.add(this);
-            this.feminine = parentJoint.feminine;
-        }
+		if (pos)
+		{ // initial joint position
+			this.position.set(pos[0], pos[1], pos[2]);
+		}
 
-        if (pos) { // initial joint position
-            this.position.set(pos[0], pos[1], pos[2]);
-        }
+		this.minRot = new THREE.Vector3();
+		this.maxRot = new THREE.Vector3();
+	} // Joint.constructor
 
-        this.minRot = new THREE.Vector3();
-        this.maxRot = new THREE.Vector3();
-
-        // Store original color
-        if (this.image && this.image.isMesh) {
-            this.image.userData.originalColor = this.image.material.color.getHex();
-        }
-    }
-	
 	get z()
 	{
 		this.rotation.reorder('YXZ');
@@ -600,19 +598,16 @@ class Joint extends THREE.Group
 		return scene.worldToLocal(this.localToWorld(new THREE.Vector3(x, y, z)));
 	} // Joint.point
 
-	// Modify the select method to only change the color of the clicked part
-	select(state) {
-		if (state) {
-			if (this.image && this.image.isMesh) {
-				this.image.material.color.set('white');
-			}
-		} else {
-			if (this.image && this.image.isMesh) {
-				this.image.material.color.set(this.image.userData.originalColor || 'originalColor');
-			}
-		}
-	}
-	
+	select(state)
+	{
+		this.traverse(function (o)
+		{
+
+			//if (o.material && o.material.emissive) o.material.emissive.setRGB(0, state ? -1 : 0, state ? -0.4 : 0);
+			if (o.material && o.material.emissive) o.material.emissive.setRGB(state ? 0.1 : 0, state ? 0.1 : 0, state ? 0.1 : 0);
+			//if (o.material && o.material.emissive) o.material.emissive.setRGB(state ? -0.46274509803 : 0, state ? -0.8431372549 : 0, state ? -0.81176470588 : 0);
+		});
+	} // Joint.select
 } // Joint
 
 
@@ -1693,7 +1688,7 @@ Mannequin.colors = [
 	'rgb(235,235,235)', // right lower leg = 12
 	'rgb(235,235,235)', // left foot = 13
 	'rgb(235,235,235)', // right foot = 14
-	'rgb(180,180,180)', // joints = 15
+	'rgb(235,235,235)', // joints = 15
 ];
 
 
@@ -1855,7 +1850,7 @@ document.addEventListener('click', function(event) {
             var intersectedObject = intersects[0].object;
 			var color = intersectedObject.material.color;
 			if (intersectedObject.geometry.type == 'ParametricGeometry' && color.r != color.g && color.r != color.b) {
-			// if (intersectedObject.geometry.type == 'ParametricGeometry' && intersectedObject.parent.name != 'neck' && color.r != color.g && color.r != color.b) {
+			// if (intersectedObject.geometry.type == 'ParametricGeometry' && intersectedObject.parent.name != 'neck' and colour code here...) {
 				intersectedObject.material.color.setStyle('rgb(235,235,235)');
 				renderer.render(scene, camera);
 				addCircle(event);
