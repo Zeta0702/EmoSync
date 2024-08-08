@@ -22,7 +22,7 @@
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lexend:wght@100..900&display=swap" rel="stylesheet">
    </head>
    <body onclick="removeCircle()">
-      <div id="circle"></div>
+      <div id="circle"><img class="eraser-icon" src="textures/eraser.svg"></div>
       <img src="textures/logo.png" alt="logo" class="logo">
       <div class="panel" style="left:0">
          <div class="heading panelText">Controls</div><hr>
@@ -48,7 +48,7 @@
       </div>
       <div class="panel" id="colourPicker" style="right:0">
          <div id="colourPickerText" class="heading panelText">Emotional<br>Colour Picker
-            <div id="eraser" onclick="addCircle(event)"></div>
+            <div id="eraser" onclick="addCircle(event)"><img class="eraser-icon" src="textures/eraser.svg"></div>
          </div><hr>
          <div class="panelText subHeading">Positive Emotions</div>
          <span class="button-group">

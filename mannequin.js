@@ -1688,7 +1688,7 @@ Mannequin.colors = [
 	'rgb(235,235,235)', // right lower leg = 12
 	'rgb(235,235,235)', // left foot = 13
 	'rgb(235,235,235)', // right foot = 14
-	'rgb(235,235,235)', // joints = 15
+	'rgb(180,180,180)', // joints = 15
 ];
 
 
