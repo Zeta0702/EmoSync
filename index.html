@@ -1,55 +1,79 @@
-﻿﻿<!DOCTYPE html>
+<!-- This is the main HTML file that sets up the EmoColour page. It links to external stylesheets and scripts for p5.js and custom CSS.
+The page includes a main section where the content will be rendered, and a div for displaying emotion-related text.
+Additional scripts for handling landmarks and sketches are included. -->
+<!DOCTYPE html>
 <html>
    <head>
-      <script type='text/javascript' > 
-        var circleVisible = false;
+      <!-- JavaScript variable for tracking the visibility of the eraser -->
+      <script type='text/javascript' >
+        var circleVisible = false; 
       </script>
       <meta charset="UTF-8">
+      <!-- Meta tags for preventing the website from being cached by browsers (useful when iterating) -->
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="cache-control" content="no-cache">
+      <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
       <meta http-equiv="pragma" content="no-cache">
       <meta http-equiv="expires" content="0">
+      <!-- Cascading Stylesheet for EmoSync -->
       <link rel="stylesheet" href="posture-editor.css">
+      <!-- Including essential scripts for the 3D rendering and model controls -->
       <script src="libs/three.min.js"></script>
       <script src="libs/OrbitControls.min.js"></script>
       <script src="libs/GLTFExporter.min.js"></script>
       <script src="mannequin.js"></script>
+      <!-- Uncomment the next line to include the ManneMotion module -->
+      <!-- <script src="mannemotion.js" type="module"></script> -->
       <title>EmoSync</title>
+      <!-- Additional scripts for color picking and model loading -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.4.5/jscolor.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/three@0.130.1/examples/js/loaders/RGBELoader.js"></script>
+      <!-- Preloading fonts for the page -->
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lexend:wght@100..900&display=swap" rel="stylesheet">
    </head>
    <body onclick="removeCircle()">
+      <!-- Circle for the eraser tool, initially hidden -->
       <div id="circle"><img class="eraser-icon" src="textures/eraser.svg"></div>
+      <!-- Logo for the EmoSync application -->
       <img src="textures/logo.png" alt="logo" class="logo">
+      <!-- Left panel containing guide and options -->
       <div class="panel" style="left:0">
-         <div class="heading panelText">Controls</div><hr>
+         <div class="heading panelText">Guide</div><hr>
+         <span class="button-group">
+         <button onclick="">help video</button>
+         </span>
+         <!-- Toggles for enabling/disabling biological constraints and inverse kinematics -->
          <label class="ghostToggle"><input id="biological-constraints" type="checkbox" class="toggle" checked><span>Biological<br>constraints</span></label>
          <label class="ghostToggle"><input id="inverse-kinematics" type="checkbox" class="toggle"><span>Inverse<br>kinematics</span></label>
-         <div class="panelText subHeading">Mannequin</div>
-         <label><input id="rot-z" type="checkbox" class="ghosttoggle" checked><span id="rot-z-name">Bend</span></label>
+         <div class="heading panelText">Mannequin</div><hr class="hr2">
+         <!-- Toggles for controlling the mannequin's rotation and movement along different axes -->
+         <label class="ghostToggle"><input id="rot-z" type="checkbox" checked><span id="rot-z-name">Bend</span></label>
          <label><input id="rot-x" type="checkbox" class="toggle"><span id="rot-x-name">Tilt</span></label><br id="x">
          <label><input id="rot-y" type="checkbox" class="toggle"><span id="rot-y-name">Turn</span></label><br id="y">
          <label><input id="mov-x" type="checkbox" class="toggle"><span>Move X</span></label><br>
          <label><input id="mov-y" type="checkbox" class="toggle"><span>Move Y</span></label><br>
          <label><input id="mov-z" type="checkbox" class="toggle"><span>Move Z</span></label>
-         <div class="panelText subHeading2">Options</div>
+         <div class="heading panelText">Options</div><hr>
          <span class="button-group">
+          <!-- Buttons for resetting the mannequin's pose and exporting the posture -->
           <button onclick="refresh()">Reset</button>
           <button id="ep">Export</button>
          </span>
-         <div class="subHeading2 panelText">Body Tracking</div>
+         <div class="heading panelText">Body Tracking</div><hr>
          <span class="button-group">
+          <!-- Buttons to activate ManneMotion and EmoColour functionalities -->
           <button>ManneMotion</button><br>
           <a href="EmoColour/index.html" target="_blank"><button>EmoColour</button></a><br>
          </span>
       </div>
+      <!-- Right panel for selecting emotional colors -->
       <div class="panel" id="colourPicker" style="right:0">
          <div id="colourPickerText" class="heading panelText">Emotional<br>Colour Picker
+            <!-- Eraser tool for clearing selections -->
             <div id="eraser" onclick="addCircle(event)"><img class="eraser-icon" src="textures/eraser.svg"></div>
-         </div><hr>
+         </div><hr class="hr3">
+         <!-- Buttons for selecting positive emotions -->
          <div class="panelText subHeading">Positive Emotions</div>
          <span class="button-group">
             <button id="one" onclick="changeColour(this)"></button>
@@ -60,6 +84,7 @@
             <button id="six" onclick="changeColour(this)"></button>
             <button id="seven" onclick="changeColour(this)"></button>
          </span>
+         <!-- Buttons for selecting negative emotions -->
          <div class="panelText subHeading"><br>Negative Emotions</div>
          <span class="button-group">
             <button id="eight" onclick="changeColour(this)"></button>
@@ -74,6 +99,9 @@
             <button id="seventeen" onclick="changeColour(this)"></button>
          </span>
       </div>
+      <!-- Hidden video element for capturing user input for body tracking -->
+      <video class="input_video" style="display:none;"></video>
+      <!-- Including the posture editor script -->
       <script src="posture-editor.js"></script>
    </body>
 </html>

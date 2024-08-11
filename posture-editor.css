@@ -1,284 +1,314 @@
-﻿/* Toggle input based on https://codepen.io/avstorm/pen/jOEpBLW */
+/* Toggle input based on https://codepen.io/avstorm/pen/jOEpBLW */
 
+/* Hide elements with the ghostToggle class */
 .ghostToggle {
 	display: none;
 }
 
+/* Style checkboxes to remove default appearance and provide a custom look */
 input[type=checkbox] {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	-webkit-tap-highlight-color: 'transparent';
-	outline: 0;
-	cursor: pointer;
+	-webkit-appearance: none; /* Remove default checkbox appearance on WebKit browsers */
+	-moz-appearance: none;    /* Remove default checkbox appearance on Mozilla browsers */
+	appearance: none;         /* Remove default checkbox appearance on all browsers */
+	-webkit-tap-highlight-color: 'transparent'; /* Remove highlight color when tapped on mobile devices */
+	outline: 0;               /* Remove outline when the checkbox is focused */
+	cursor: pointer;          /* Change the cursor to a pointer to indicate it's clickable */
 }
 
+/* Style for elements with the short class, making them inline blocks with a specific width */
 span.short {
 	display: inline-block;
-	width: 2em;
-	text-align: right;
+	width: 2em; /* Set the width to 2em units */
+	text-align: right; /* Align the text to the right */
 }
 
+/* Style for the logo container */
 .logo {
 	position: relative;
-	width: 10em;
-	height: 10em;
-	z-index: 1;
+	width: 10em;  /* Set the width of the logo */
+	height: 10em; /* Set the height of the logo */
+	z-index: 1;   /* Set a lower stacking order to keep it behind other elements if necessary */
 }
 
+/* Style for panels, used to display blocks of content */
 .panel {
 	position: relative;
 	display: block;
-	margin: 0.3em;
-	padding: 0.3em;
-	width: 10em;
-	top: 0;
-	z-index: 10;
-	border-radius: 1em;
-	background: rgb(235,235,235);
-	border: solid 1px rgba(0, 0, 0, 0.05);
-	/*box-shadow: inset 0 0 0.1em rgba(0, 0, 0, 0.1);*/
-	backdrop-filter: blur(0.3em);
+	margin: 0.3em;  /* Set the margin around the panel */
+	padding: 0.3em; /* Set the padding inside the panel */
+	width: 10em;    /* Set the width of the panel */
+	top: 0;         /* Align the panel to the top */
+	z-index: 10;    /* Set a higher stacking order to keep it above other elements */
+	border-radius: 1em; /* Round the corners of the panel */
+	background: rgb(235,235,235); /* Set a light grey background color */
+	border: solid 1px rgba(0, 0, 0, 0.05); /* Add a subtle border around the panel */
+	/* box-shadow: inset 0 0 0.1em rgba(0, 0, 0, 0.1);  Optionally add an inset shadow for a slight depth effect */
+	backdrop-filter: blur(0.3em); /* Apply a blur effect to the background of the panel */
 }
 
+/* Position the color picker in a fixed position on the screen */
 #colourPicker {
 	position: fixed;
 }
 
+/* Style for rows of colors, setting their dimensions */
 .colourRow {
-	width: 16em;
-	height: 4em;
+	width: 16em;  /* Set the width of the color row */
+	height: 4em;  /* Set the height of the color row */
 }
 
+/* Specific background colors for different IDs */
 #one {
-	background-color: rgb(156, 224, 213);
+	background-color: rgb(156, 224, 213); /* Set a specific color for the element with ID 'one' */
 }
 
 #two {
-	background-color: rgb(108, 212, 184);
+	background-color: rgb(108, 212, 184); /* Set a specific color for the element with ID 'two' */
 }
 
 #three {
-	background-color: rgb(92, 184, 156);
+	background-color: rgb(92, 184, 156); /* Set a specific color for the element with ID 'three' */
 }
 
 #four {
-	background-color: rgb(74, 150, 119);
+	background-color: rgb(74, 150, 119); /* Set a specific color for the element with ID 'four' */
 }
 
 #five {
-	background-color: rgb(250, 224, 77);
+	background-color: rgb(250, 224, 77); /* Set a specific color for the element with ID 'five' */
 }
 
 #six {
-	background-color: rgb(243, 173, 60);
+	background-color: rgb(243, 173, 60); /* Set a specific color for the element with ID 'six' */
 }
 
 #seven {
-	background-color: rgb(238, 121, 51);
+	background-color: rgb(238, 121, 51); /* Set a specific color for the element with ID 'seven' */
 }
 
 #eight {
-	background-color: rgb(191, 43, 33);
+	background-color: rgb(191, 43, 33); /* Set a specific color for the element with ID 'eight' */
 }
 
 #nine {
-	background-color: rgb(200,100,100);
+	background-color: rgb(200,100,100); /* Set a specific color for the element with ID 'nine' */
 }
 
 #ten {
-	background-color: rgb(230, 172, 163);
+	background-color: rgb(230, 172, 163); /* Set a specific color for the element with ID 'ten' */
 }
 
 #eleven {
-	background-color: rgb(138, 95, 146);
+	background-color: rgb(138, 95, 146); /* Set a specific color for the element with ID 'eleven' */
 }
 
 #twelve {
-	background-color: rgb(135, 67, 132);
+	background-color: rgb(135, 67, 132); /* Set a specific color for the element with ID 'twelve' */
 }
 
 #thirteen {
-	background-color: rgb(89, 54, 130);
+	background-color: rgb(89, 54, 130); /* Set a specific color for the element with ID 'thirteen' */
 }
 
 #fourteen {
-	background-color: rgb(37, 57, 141);
+	background-color: rgb(37, 57, 141); /* Set a specific color for the element with ID 'fourteen' */
 }
 
 #fifteen {
-	background-color: rgb(60, 113, 165);
+	background-color: rgb(60, 113, 165); /* Set a specific color for the element with ID 'fifteen' */
 }
 
 #sixteen {
-	background-color: rgb(67, 136, 189);
+	background-color: rgb(67, 136, 189); /* Set a specific color for the element with ID 'sixteen' */
 }
 
 #seventeen {
-	background-color: rgb(109, 169, 222);
+	background-color: rgb(109, 169, 222); /* Set a specific color for the element with ID 'seventeen' */
 }
 
+/* Style for horizontal rules (lines) */
 hr {
-	margin-bottom: 1em;
-	border: 0;
-	height: 1px;
-	background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0));
+	border: 0; /* Remove the default border */
+	height: 1px; /* Set the height of the line */
+	background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0)); /* Create a black line using a gradient */
 }
 
+/* Additional margin styles for different classes of horizontal rules */
+.hr2 {
+	margin-bottom: 0.75em; /* Add some space below the line */
+}
+
+.hr3 {
+	margin-bottom: 1em; /* Add more space below the line */
+}
+
+
+/* Styling for label elements */
 label {
-	cursor: pointer;
-	display: inline-block;
-	margin-bottom: 10px;
-	z-index: 10;
+	cursor: pointer; /* Change the cursor to a pointer when hovering over labels */
+	display: inline-block; /* Display labels as inline blocks */
+	margin-bottom: 10px; /* Add space below each label */
+	z-index: 10; /* Set a higher stacking order to ensure the label is above other elements */
 }
 
+/* Shared styles for buttons, spans within labels, button groups, and panel text */
 button,
 label span,
 .button-group,
 .panelText {
-	font-family: "Lexend", sans-serif;
-	font-optical-sizing: auto;
-	font-weight: 400;
-	font-style: normal;
-	font-size: 0.7em;
-	display: inline-block;
-	margin-left: 5px;
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	vertical-align: middle;
-	color: black;
-	/*text-shadow: 0 0 0.2em gray;*/
+	font-family: "Lexend", sans-serif; /* Set the font family */
+	font-optical-sizing: auto; /* Automatically adjust the font size for optimal readability */
+	font-weight: 400; /* Set the font weight */
+	font-style: normal; /* Set the font style to normal */
+	font-size: 0.7em; /* Set the font size */
+	display: inline-block; /* Display as inline blocks */
+	margin-left: 5px; /* Add space to the left */
+	text-transform: uppercase; /* Transform text to uppercase */
+	letter-spacing: 1px; /* Increase letter spacing */
+	vertical-align: middle; /* Align vertically in the middle */
+	color: black; /* Set text color to black */
+	/*text-shadow: 0 0 0.2em gray;  Optionally add a shadow to the text */
 }
 
+/* Styling for heading elements */
 .heading {
-	margin-top: 0.5em;
+	margin-top: 0.5em; /* Add space above the heading */
 }
 
+/* Styling for subheadings */
 .subHeading {
-	transform: translateY(-0.5em);
-	margin-bottom: 0.3em;
+	transform: translateY(-0.5em); /* Move the subheading slightly upwards */
+	margin-bottom: 0.3em; /* Add space below the subheading */
 }
 
 .subHeading2 {
-	margin-bottom: 0.5em;
-	margin-top: 0.5em;
+	margin-bottom: 0.5em; /* Add more space below the subheading */
+	margin-top: 0.5em; /* Add space above the subheading */
 }
 
+/* Styling for button groups */
 .button-group {
-	width: 94%;
+	width: 94%; /* Set the width of the button group */
 }
 
+/* Styling for buttons and toggle switches */
 button,
 .toggle {
-	height: 24px;
-	width: 56px;
-	border-radius: 12px;
-	display: inline-block;
-	position: relative;
-	margin: 0;
-	padding: 0;
-	border: 1px solid black;
-	background: rgb(235,235,235);
-	vertical-align: middle;
+	height: 24px; /* Set the height */
+	width: 56px; /* Set the width */
+	border-radius: 12px; /* Round the corners */
+	display: inline-block; /* Display as inline blocks */
+	position: relative; /* Position relative to its normal position */
+	margin: 0; /* Remove margins */
+	padding: 0; /* Remove padding */
+	border: 1px solid black; /* Add a black border */
+	background: rgb(235,235,235); /* Set background color */
+	vertical-align: middle; /* Align vertically in the middle */
 }
 
+/* Specific styling for buttons */
 button {
-	height: 24px;
-	width: 100%;
-	color: black;
-	margin: 0.5em 0;
-	font-size: 1em;
+	height: 24px; /* Set the height */
+	width: 100%; /* Set the width to fill its container */
+	color: black; /* Set text color to black */
+	margin: 0.5em 0; /* Add margin above and below the button */
+	font-size: 1em; /* Set the font size */
 }
 
+/* Hover effect for buttons */
 button:hover {
-	cursor: pointer;
-	background: rgb(173,222,218);
+	cursor: pointer; /* Change cursor to pointer on hover */
+	background: rgb(173,222,218); /* Change background color on hover */
 }
 
+/* Hover effect for button groups */
 .button-group:hover {
-	color: black;
+	color: black; /* Ensure text color stays black on hover */
 }
 
+/* Styling for the toggle switch indicator */
 .toggle:after {
-	content: "";
-	position: absolute;
-	top: 2px;
-	left: 2px;
-	width: 16px;
-	height: 16px;
-	border-radius: 50%;
-	background: rgb(235,235,235);
-	border: solid 1px black;
+	content: ""; /* Add empty content for the indicator */
+	position: absolute; /* Position the indicator absolutely within the toggle */
+	top: 2px; /* Position it from the top */
+	left: 2px; /* Position it from the left */
+	width: 16px; /* Set the width */
+	height: 16px; /* Set the height */
+	border-radius: 50%; /* Make the indicator circular */
+	background: rgb(235,235,235); /* Set background color */
+	border: solid 1px black; /* Add a black border */
 }
 
-/*
-.toggle:checked {
-	border-color: green;
-}
-*/
-
+/* Styles for checked toggle switches and associated span elements */
 :checked+span,
 :checked+span+span,
 :checked+span+span+span {
-	color: rgb(118,215,207);
-	font-weight: bold;
-	/*text-shadow: 0 0 0.1em dimgray;*/
+	color: rgb(118,215,207); /* Change text color to a light teal when checked */
+	font-weight: bold; /* Make text bold */
+	/*text-shadow: 0 0 0.1em dimgray; Optionally add a shadow to the text */
 }
 
+/* Styling for the toggle switch when it is checked */
 .toggle:checked:after {
-	border-color: rgb(118,215,207);
-	background: rgb(118,215,207);
-	transform: translatex(32px);
+	border-color: rgb(118,215,207); /* Change border color of the indicator */
+	background: rgb(118,215,207); /* Change background color of the indicator */
+	transform: translatex(32px); /* Move the indicator to the right when checked */
 }
 
+/* Styling for textarea elements */
 textarea {
-	z-index: -1;
+	z-index: -1; /* Set the stacking order to ensure it's behind other elements */
 }
 
+/* Styling for a circle element, likely used for cursor effects */
 #circle {
-	position: fixed;
-	display: none;
-	border-radius: 50%;
-	height: 24px;
-	width: 24px;
-	transform: translateX(-50%) translateY(-50%);
-	cursor: none;
-	z-index: 1000;
-	left: -100px;
- 	top: 50%;
-	border: solid 1px #000000;
-	background-color: rgb(235,235,235);
-  }
+	position: fixed; /* Position the circle fixed relative to the viewport */
+	display: none; /* Initially hide the circle */
+	border-radius: 50%; /* Make the circle perfectly round */
+	height: 24px; /* Set the height */
+	width: 24px; /* Set the width */
+	transform: translateX(-50%) translateY(-50%); /* Center the circle on both axes */
+	cursor: none; /* Hide the cursor when over this element */
+	z-index: 1000; /* Set a high stacking order to ensure it appears above other elements */
+	left: -100px; /* Position it offscreen initially */
+ 	top: 50%; /* Position it vertically in the middle of the viewport */
+	border: solid 1px #000000; /* Add a black border */
+	background-color: rgb(235,235,235); /* Set background color */
+}
 
+/* Styling for an eraser element */
 #eraser {
-	position: absolute;
-	border-radius: 50%;
-	height: 24px;
-	width: 24px;
-	cursor: pointer;
-	z-index: 1000;
-	border: solid 1px #000000;
-	background-color: rgb(235,235,235);
-	left: 10.6em;
-	bottom: 0.2em;
+	position: absolute; /* Position the eraser absolutely within its container */
+	border-radius: 50%; /* Make the eraser circular */
+	height: 24px; /* Set the height */
+	width: 24px; /* Set the width */
+	cursor: pointer; /* Change cursor to pointer on hover */
+	z-index: 1000; /* Set a high stacking order */
+	border: solid 1px #000000; /* Add a black border */
+	background-color: rgb(235,235,235); /* Set background color */
+	left: 10.6em; /* Position it horizontally */
+	bottom: 0.2em; /* Position it slightly above the bottom */
 }
 
+/* Styling for text associated with a color picker */
 #colourPickerText {
-	position: relative;
+	position: relative; /* Position relative to its normal position */
 }
 
+/* Hide an element with the ID rot-z-name */
 #rot-z-name {
-	display: none;
+	display: none; /* Hide the element */
 }
 
+/* Styling for an icon within the eraser element */
 .eraser-icon {
-	transform: scaleY(-1);
-	height: 80%;
-	width: 80%;
-	position: absolute;
-    margin: auto;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+	transform: scaleY(-1); /* Flip the icon vertically */
+	height: 80%; /* Set the height to 80% of its container */
+	width: 80%; /* Set the width to 80% of its container */
+	position: absolute; /* Position the icon absolutely within its container */
+    margin: auto; /* Center the icon horizontally and vertically */
+    top: 0; /* Align the top of the icon */
+    left: 0; /* Align the left of the icon */
+    right: 0; /* Align the right of the icon */
+    bottom: 0; /* Align the bottom of the icon */
 }
