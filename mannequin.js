@@ -627,7 +627,7 @@ class Joint extends THREE.Group {
 		this.traverse(function (o) {
 			// If the object has a material with an emissive property, adjust the color based on the state
 			if (o.material && o.material.emissive) {
-				o.material.emissive.setRGB(state ? 0.1 : 0, state ? 0.1 : 0, state ? 0.1 : 0);
+				o.material.emissive.setRGB(state ? 0.1 : 0, state ? 0.1 : 0, state ? 0.1 : 0); // This line was edited to make the select colour white instead of green
 			}
 		});
 	} // Joint.select
@@ -1601,7 +1601,7 @@ class Mannequin extends THREE.Group {
 		// Download the current canvas as a PNG image
 		var a = document.createElement('a');
 		a.href = renderer.domElement.toDataURL().replace("image/png", "image/octet-stream");
-		a.download = 'canvas.png';
+		a.download = 'Body-Posture.png';
 		a.click();
 	} // Mannequin.exportPNG
 }
@@ -1663,7 +1663,7 @@ class Child extends Mannequin {
 	} // Child.constructor
 } // Child
 
-// Default colors for various body parts of the mannequin
+// Default colors for various body parts of the mannequin (most of these are redundant)
 Mannequin.colors = [
 	'rgb(235,235,235)', // head = 0
 	'rgb(235,235,235)', // torso = 1
@@ -1684,7 +1684,7 @@ Mannequin.colors = [
 ];
 
 // Load textures for head and limbs
-Mannequin.texHead = new THREE.TextureLoader().load("textures/head.png");
+Mannequin.texHead = new THREE.TextureLoader().load("textures/head.png"); // A new head texture was created
 //Mannequin.texLimb = new THREE.TextureLoader().load("textures/limb.png");
 
 // Define the geometry for joints (spherical objects)
@@ -1786,6 +1786,16 @@ Mannequin.convert6to7 = function(posture) {
 
 // Global variable to track the button that was clicked
 var clickedButton;
+
+
+
+
+
+
+
+// ----------------------------------
+// Newly Added Code
+// ----------------------------------
 
 // Function to add a circle to the DOM and move it with the mouse
 function addCircle(event) {
