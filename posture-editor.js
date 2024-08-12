@@ -371,21 +371,21 @@ function onPointerDown(event) {
 		// Conditionally display or hide rotation controls based on the availability of rotation axes
 		if (document.getElementById('rot-x-name').innerHTML == 'N/A') {
 			document.getElementById('rot-x-name').style.display = 'none';
-			document.getElementById('rot-x').style.display = 'none';
+			document.getElementById('rot-x-row').style.display = 'none';
 			document.getElementById('x').style.display = 'none';
 		} else {
 			document.getElementById('rot-x-name').style.display = 'inline-block';
-			document.getElementById('rot-x').style.display = 'inline-block';
+			document.getElementById('rot-x-row').style.display = 'inline-block';
 			document.getElementById('x').style.display = 'inline-block';
 		}
 
 		if (document.getElementById('rot-y-name').innerHTML == 'N/A') {
 			document.getElementById('rot-y-name').style.display = 'none';
-			document.getElementById('rot-y').style.display = 'none';
+			document.getElementById('rot-y-row').style.display = 'none';
 			document.getElementById('y').style.display = 'none';
 		} else {
 			document.getElementById('rot-y-name').style.display = 'inline-block';
-			document.getElementById('rot-y').style.display = 'inline-block';
+			document.getElementById('rot-y-row').style.display = 'inline-block';
 			document.getElementById('y').style.display = 'inline-block';
 		}
 		
